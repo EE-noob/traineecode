@@ -23,8 +23,8 @@
 
 module spi_master_apb_if
 #(
-    parameter BUFFER_DEPTH   = 10,
-    parameter APB_ADDR_WIDTH = 12,  //APB slaves are 4KB by default
+    parameter BUFFER_DEPTH   = 32,
+    parameter APB_ADDR_WIDTH = 32,  //APB slaves are 4KB by default
     parameter LOG_BUFFER_DEPTH = `log2(BUFFER_DEPTH)
 )
 (
@@ -32,9 +32,9 @@ module spi_master_apb_if
     input  logic                      HRESETn,
     input  logic [APB_ADDR_WIDTH-1:0] PADDR,
     input  logic               [31:0] PWDATA,
-    input  logic                      PWRITE,
     input  logic                      PSEL,
     input  logic                      PENABLE,
+    input  logic                      PWRITE,//1 write 0 read
     output logic               [31:0] PRDATA,
     output logic                      PREADY,
     output logic                      PSLVERR,
