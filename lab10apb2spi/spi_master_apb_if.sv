@@ -19,7 +19,7 @@
 `define REG_TXFIFO 4'b0110 // BASEREG + 0x18
 `define REG_RXFIFO 4'b1000 // BASEREG + 0x20
 `define REG_INTCFG 4'b1001 // BASEREG + 0x24
-`define REG_INTSTA 4'b1010 // BASEREG + 0x28
+//`define REG_INTSTA 4'b1010 // BASEREG + 0x28
 
 module spi_master_apb_if
 #(
@@ -27,18 +27,50 @@ module spi_master_apb_if
     parameter APB_ADDR_WIDTH = 32,  //APB slaves are 4KB by default
     parameter LOG_BUFFER_DEPTH = `log2(BUFFER_DEPTH)
 )
-(
+(//apb port   
+    //clk and reset
     input  logic                      HCLK,
     input  logic                      HRESETn,
+    //input port of apb bus
     input  logic [APB_ADDR_WIDTH-1:0] PADDR,
     input  logic               [31:0] PWDATA,
     input  logic                      PSEL,
     input  logic                      PENABLE,
     input  logic                      PWRITE,//1 write 0 read
+    //output of apb
     output logic               [31:0] PRDATA,
     output logic                      PREADY,
     output logic                      PSLVERR,
-
+    //interupt
+    output logic               [2:0]  events_o,//[0] read ,[1] instructions over,[2] write
+//spi physical port
+//output
+    output logic                      spi_clk,
+    output logic               [1:0]  spi_mode,//standard,dual,quad
+    //cs_n
+    output logic                      spi_csn0,
+    output logic                      spi_csn1,
+    output logic                      spi_csn2,
+    output logic                      spi_csn3,
+    //MOSI for SPI slave
+    output logic                      spi_sdo0,
+    output logic                      spi_sdo1,
+    output logic                      spi_sdo2,
+    output logic                      spi_sdo3,              
+//input
+    //MISO for SPI slave
+    input logic                       spi_sdi0,
+    input logic                       spi_sdi1,
+    input logic                       spi_sdi2,
+    input logic                       spi_sdi3
+//APB regs
+    //REG_STATUS  0x00;  [5:2] 0000;
+    output logic                      spi_rd,//mono read
+    output logic                      spi_wr,//mono write
+    output logic                      spi_qrd,//quadri read
+    output logic                      spi_qwr,//quadri write
+    output logic                      spi_swrst,//software reset
+    //REG_CLKDIV  0x04;  [5:2] 0001;
     output logic                [7:0] spi_clk_div,
     output logic                      spi_clk_div_valid,
     input  logic               [31:0] spi_status,
@@ -57,17 +89,15 @@ module spi_master_apb_if
     output logic                      spi_int_en,
     output logic                      spi_int_cnt_en,
     output logic                      spi_int_rd_sta,
-    output logic                      spi_swrst,
-    output logic                      spi_rd,
-    output logic                      spi_wr,
-    output logic                      spi_qrd,
-    output logic                      spi_qwr,
+    
+
+    
     output logic               [31:0] spi_data_tx,
     output logic                      spi_data_tx_valid,
     input  logic                      spi_data_tx_ready,
     input  logic               [31:0] spi_data_rx,
     input  logic                      spi_data_rx_valid,
-    output logic                      spi_data_rx_ready
+    output logic                      spi_data_rx_ready*/
 );
 
     logic [3:0] write_address;
