@@ -8,7 +8,7 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 
-`define log2(VALUE) ((VALUE) < ( 1 ) ? 0 : (VALUE) < ( 2 ) ? 1 : (VALUE) < ( 4 ) ? 2 : (VALUE) < ( 8 ) ? 3 : (VALUE) < ( 16 )  ? 4 : (VALUE) < ( 32 )  ? 5 : (VALUE) < ( 64 )  ? 6 : (VALUE) < ( 128 ) ? 7 : (VALUE) < ( 256 ) ? 8 : (VALUE) < ( 512 ) ? 9 : (VALUE) < ( 1024 ) ? 10 : (VALUE) < ( 2048 ) ? 11 : (VALUE) < ( 4096 ) ? 12 : (VALUE) < ( 8192 ) ? 13 : (VALUE) < ( 16384 ) ? 14 : (VALUE) < ( 32768 ) ? 15 : (VALUE) < ( 65536 ) ? 16 : (VALUE) < ( 131072 ) ? 17 : (VALUE) < ( 262144 ) ? 18 : (VALUE) < ( 524288 ) ? 19 : (VALUE) < ( 1048576 ) ? 20 : (VALUE) < ( 1048576 * 2 ) ? 21 : (VALUE) < ( 1048576 * 4 ) ? 22 : (VALUE) < ( 1048576 * 8 ) ? 23 : (VALUE) < ( 1048576 * 16 ) ? 24 : 25)
+`define BigLog2(VALUE) ((VALUE) < ( 1 ) ? 0 : (VALUE) < ( 2 ) ? 1 : (VALUE) < ( 4 ) ? 2 : (VALUE) < ( 8 ) ? 3 : (VALUE) < ( 16 )  ? 4 : (VALUE) < ( 32 )  ? 5 : (VALUE) < ( 64 )  ? 6 : (VALUE) < ( 128 ) ? 7 : (VALUE) < ( 256 ) ? 8 : (VALUE) < ( 512 ) ? 9 : (VALUE) < ( 1024 ) ? 10 : (VALUE) < ( 2048 ) ? 11 : (VALUE) < ( 4096 ) ? 12 : (VALUE) < ( 8192 ) ? 13 : (VALUE) < ( 16384 ) ? 14 : (VALUE) < ( 32768 ) ? 15 : (VALUE) < ( 65536 ) ? 16 : (VALUE) < ( 131072 ) ? 17 : (VALUE) < ( 262144 ) ? 18 : (VALUE) < ( 524288 ) ? 19 : (VALUE) < ( 1048576 ) ? 20 : (VALUE) < ( 1048576 * 2 ) ? 21 : (VALUE) < ( 1048576 * 4 ) ? 22 : (VALUE) < ( 1048576 * 8 ) ? 23 : (VALUE) < ( 1048576 * 16 ) ? 24 : 25)
 
 `define REG_STATUS 4'b0000 // BASEREG + 0x00
 `define REG_CLKDIV 4'b0001 // BASEREG + 0x04
@@ -25,7 +25,7 @@ module spi_master_apb_if
 #(
     parameter BUFFER_DEPTH   = 32,
     parameter APB_ADDR_WIDTH = 32,  //APB slaves are 4KB by default
-    parameter LOG_BUFFER_DEPTH = `log2(BUFFER_DEPTH)
+    parameter BIGLOG_BUFFER_DEPTH = `BigLog2(BUFFER_DEPTH)
 )
 (//apb port   
     //clk and reset
@@ -62,7 +62,7 @@ module spi_master_apb_if
     input logic                       spi_sdi0,
     input logic                       spi_sdi1,
     input logic                       spi_sdi2,
-    input logic                       spi_sdi3
+    input logic                       spi_sdi3,
 //APB regs
     //REG_STATUS  0x00;  [5:2] 0000;
     output logic                      spi_rd,//mono read
@@ -70,34 +70,40 @@ module spi_master_apb_if
     output logic                      spi_qrd,//quadri read
     output logic                      spi_qwr,//quadri write
     output logic                      spi_swrst,//software reset
+    output logic                [3:0] spi_csreg,//spi slave cs
+    //other bits reserve
     //REG_CLKDIV  0x04;  [5:2] 0001;
-    output logic                [7:0] spi_clk_div,
-    output logic                      spi_clk_div_valid,
-    input  logic               [31:0] spi_status,
-    output logic               [31:0] spi_addr,
-    output logic                [5:0] spi_addr_len,
+    output logic                [7:0] spi_clk_div,//0x00:div2,0x01:div4,etc
+    //REG_SPICMD  0x08;  [5:2] 0010;
     output logic               [31:0] spi_cmd,
+    //REG_SPIADR  0x0c;  [5:2] 0011;
+    output logic               [31:0] spi_addr,
+    //REG_SPILEN  0x10;  [5:2] 0100;
     output logic                [5:0] spi_cmd_len,
-    output logic                [3:0] spi_csreg,
-    output logic               [15:0] spi_data_len,
+    output logic                [5:0] spi_addr_len,//13:8
+    output logic               [15:0] spi_data_len,//31:16
+    //REG_SPIDUM  0x14;  [5:2] 0101;
     output logic               [15:0] spi_dummy_rd,
     output logic               [15:0] spi_dummy_wr,
-    output logic [LOG_BUFFER_DEPTH:0] spi_int_th_tx,
-    output logic [LOG_BUFFER_DEPTH:0] spi_int_th_rx,
-    output logic [LOG_BUFFER_DEPTH:0] spi_int_cnt_tx,
-    output logic [LOG_BUFFER_DEPTH:0] spi_int_cnt_rx,
-    output logic                      spi_int_en,
-    output logic                      spi_int_cnt_en,
-    output logic                      spi_int_rd_sta,
-    
-
-    
+    //REG_TXFIFO  0x18;  [5:2] 0110;
     output logic               [31:0] spi_data_tx,
+    input  logic               [31:0] spi_status,
+    //REG_RXFIFO  0x20;  [5:2] 1000;
+    input  logic               [31:0] spi_data_rx,
+    //REG_INTCFG  0x24;  [5:2] 0110;
+    output logic [BIGLOG_BUFFER_DEPTH:0] spi_int_th_tx,//spi interrupt threshold of transmit
+    output logic [BIGLOG_BUFFER_DEPTH:0] spi_int_th_rx,//spi interrupt threshold of receive 
+    output logic [BIGLOG_BUFFER_DEPTH:0] spi_int_cnt_tx,//spi interrupt max brust data count of transmit
+    output logic [BIGLOG_BUFFER_DEPTH:0] spi_int_cnt_rx,//spi interrupt max brust data count of receive
+    output logic                      spi_int_cnt_en,//spi interrupt counter enable
+    output logic                      spi_int_en,//spi interrupt enable
+    //i dont know
+    output logic                      spi_clk_div_valid,
+    output logic                      spi_int_rd_sta,//spi read status,0 idle,1 busy
     output logic                      spi_data_tx_valid,
     input  logic                      spi_data_tx_ready,
-    input  logic               [31:0] spi_data_rx,
     input  logic                      spi_data_rx_valid,
-    output logic                      spi_data_rx_ready*/
+    output logic                      spi_data_rx_ready
 );
 
     logic [3:0] write_address;
@@ -110,9 +116,11 @@ module spi_master_apb_if
     assign PREADY  = 1'b1;
 
     assign spi_int_rd_sta = PSEL & PENABLE & ~PWRITE & (read_address  == `REG_INTSTA);
+    //1:read ing ...  REG_INTSTA
 
     always @( posedge HCLK or negedge HRESETn )
     begin
+        //rest
         if ( HRESETn == 1'b0 )
         begin
             spi_swrst         <= 1'b0;
@@ -137,6 +145,7 @@ module spi_master_apb_if
             spi_int_cnt_en    <= 1'b0; 
             spi_int_en        <= 1'b0; 
         end
+        //apb write
         else  if (PSEL && PENABLE && PWRITE)
               begin
                   spi_swrst         <= 1'b0;
@@ -185,13 +194,13 @@ module spi_master_apb_if
                       spi_dummy_wr[7:0]  <= PWDATA[23:16];
                       spi_dummy_wr[15:8] <= PWDATA[31:24];
                   end
-
+                //tx/rx fifo?
                   `REG_INTCFG:
                   begin
-                      spi_int_th_tx  <= PWDATA[     LOG_BUFFER_DEPTH: 0];
-                      spi_int_th_rx  <= PWDATA[ 8 + LOG_BUFFER_DEPTH: 8];
-                      spi_int_cnt_tx <= PWDATA[16 + LOG_BUFFER_DEPTH:16];
-                      spi_int_cnt_rx <= PWDATA[24 + LOG_BUFFER_DEPTH:24];
+                      spi_int_th_tx  <= PWDATA[     BIGLOG_BUFFER_DEPTH: 0];
+                      spi_int_th_rx  <= PWDATA[ 8 + BIGLOG_BUFFER_DEPTH: 8];
+                      spi_int_cnt_tx <= PWDATA[16 + BIGLOG_BUFFER_DEPTH:16];
+                      spi_int_cnt_rx <= PWDATA[24 + BIGLOG_BUFFER_DEPTH:24];
                       spi_int_cnt_en <= PWDATA[30];
                       spi_int_en     <= PWDATA[31];
                   end
@@ -230,10 +239,10 @@ module spi_master_apb_if
         `REG_INTCFG:
         begin
             PRDATA                           = '0;
-            PRDATA[     LOG_BUFFER_DEPTH: 0] = spi_int_th_tx;
-            PRDATA[ 8 + LOG_BUFFER_DEPTH: 8] = spi_int_th_rx;
-            PRDATA[16 + LOG_BUFFER_DEPTH:16] = spi_int_cnt_tx;
-            PRDATA[24 + LOG_BUFFER_DEPTH:24] = spi_int_cnt_rx;
+            PRDATA[     BIGLOG_BUFFER_DEPTH: 0] = spi_int_th_tx;
+            PRDATA[ 8 + BIGLOG_BUFFER_DEPTH: 8] = spi_int_th_rx;
+            PRDATA[16 + BIGLOG_BUFFER_DEPTH:16] = spi_int_cnt_tx;
+            PRDATA[24 + BIGLOG_BUFFER_DEPTH:24] = spi_int_cnt_rx;
             PRDATA[30]                       = spi_int_cnt_en;
             PRDATA[31]                       = spi_int_en;
         end
