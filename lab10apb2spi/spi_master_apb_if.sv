@@ -1,12 +1,14 @@
-// Copyright 2015 ETH Zurich and University of Bologna.
-// Copyright and related rights are licensed under the Solderpad Hardware
-// License, Version 0.51 (the “License”); you may not use this file except in
-// compliance with the License.  You may obtain a copy of the License at
-// http://solderpad.org/licenses/SHL-0.51. Unless required by applicable law
-// or agreed to in writing, software, hardware and materials distributed under
-// this License is distributed on an “AS IS” BASIS, WITHOUT WARRANTIES OR
-// CONDITIONS OF ANY KIND, either express or implied. See the License for the
-// specific language governing permissions and limitations under the License.
+// ----------------------------------------------------
+//COPYRIGHT(c)2012，Macrosilico Technologies Co， Ltd+
+// All rights reserved
+// Module name : module. name .
+// function description :
+//
+// Author: sysu/MST202302018
+// Date:2023/4/14
+// history :none
+// ----------------------------------------------------
+
 
 `define BigLog2(VALUE) ((VALUE) < ( 1 ) ? 0 : (VALUE) < ( 2 ) ? 1 : (VALUE) < ( 4 ) ? 2 : (VALUE) < ( 8 ) ? 3 : (VALUE) < ( 16 )  ? 4 : (VALUE) < ( 32 )  ? 5 : (VALUE) < ( 64 )  ? 6 : (VALUE) < ( 128 ) ? 7 : (VALUE) < ( 256 ) ? 8 : (VALUE) < ( 512 ) ? 9 : (VALUE) < ( 1024 ) ? 10 : (VALUE) < ( 2048 ) ? 11 : (VALUE) < ( 4096 ) ? 12 : (VALUE) < ( 8192 ) ? 13 : (VALUE) < ( 16384 ) ? 14 : (VALUE) < ( 32768 ) ? 15 : (VALUE) < ( 65536 ) ? 16 : (VALUE) < ( 131072 ) ? 17 : (VALUE) < ( 262144 ) ? 18 : (VALUE) < ( 524288 ) ? 19 : (VALUE) < ( 1048576 ) ? 20 : (VALUE) < ( 1048576 * 2 ) ? 21 : (VALUE) < ( 1048576 * 4 ) ? 22 : (VALUE) < ( 1048576 * 8 ) ? 23 : (VALUE) < ( 1048576 * 16 ) ? 24 : 25)
 
@@ -19,7 +21,7 @@
 `define REG_TXFIFO 4'b0110 // BASEREG + 0x18
 `define REG_RXFIFO 4'b1000 // BASEREG + 0x20
 `define REG_INTCFG 4'b1001 // BASEREG + 0x24
-//`define REG_INTSTA 4'b1010 // BASEREG + 0x28
+`define REG_INTSTA 4'b1010 // BASEREG + 0x28
 
 module spi_master_apb_if
 #(
@@ -29,85 +31,91 @@ module spi_master_apb_if
 )
 (//apb port   
     //clk and reset
-    input  logic                      HCLK,
-    input  logic                      HRESETn,
+    input  wire                      HCLK,
+    input  wire                      HRESETn,
     //input port of apb bus
-    input  logic [APB_ADDR_WIDTH-1:0] PADDR,
-    input  logic               [31:0] PWDATA,
-    input  logic                      PSEL,
-    input  logic                      PENABLE,
-    input  logic                      PWRITE,//1 write 0 read
+    input  wire [APB_ADDR_WIDTH-1:0] PADDR,
+    input  wire               [31:0] PWDATA,
+    input  wire                      PSEL,
+    input  wire                      PENABLE,
+    input  wire                      PWRITE,//1 write 0 read
     //output of apb
-    output logic               [31:0] PRDATA,
-    output logic                      PREADY,
-    output logic                      PSLVERR,
-    //interupt
-    output logic               [2:0]  events_o,//[0] read ,[1] instructions over,[2] write
+    output reg               [31:0] PRDATA,
+    output wire                      PREADY,
+    output wire                      PSLVERR,
+
+/*
+//interupt
+    output reg               [2:0]  events_o,//[0] read ,[1] instructions over,[2] write
 //spi physical port
 //output
-    output logic                      spi_clk,
-    output logic               [1:0]  spi_mode,//standard,dual,quad
+    output reg                      spi_clk,
+    output reg               [1:0]  spi_mode,//standard,dual,quad
     //cs_n
-    output logic                      spi_csn0,
-    output logic                      spi_csn1,
-    output logic                      spi_csn2,
-    output logic                      spi_csn3,
+    output reg                      spi_csn0,
+    output reg                      spi_csn1,
+    output reg                      spi_csn2,
+    output reg                      spi_csn3,
     //MOSI for SPI slave
-    output logic                      spi_sdo0,
-    output logic                      spi_sdo1,
-    output logic                      spi_sdo2,
-    output logic                      spi_sdo3,              
+    output reg                      spi_sdo0,
+    output reg                      spi_sdo1,
+    output reg                      spi_sdo2,
+    output reg                      spi_sdo3,              
 //input
     //MISO for SPI slave
-    input logic                       spi_sdi0,
-    input logic                       spi_sdi1,
-    input logic                       spi_sdi2,
-    input logic                       spi_sdi3,
+    input wire                       spi_sdi0,
+    input wire                       spi_sdi1,
+    input wire                       spi_sdi2,
+    input wire                       spi_sdi3,
+*/
+
 //APB regs
     //REG_STATUS  0x00;  [5:2] 0000;
-    output logic                      spi_rd,//mono read
-    output logic                      spi_wr,//mono write
-    output logic                      spi_qrd,//quadri read
-    output logic                      spi_qwr,//quadri write
-    output logic                      spi_swrst,//software reset
-    output logic                [3:0] spi_csreg,//spi slave cs
+    output reg                      spi_rd,//mono read
+    output reg                      spi_wr,//mono write
+    output reg                      spi_qrd,//quadri read
+    output reg                      spi_qwr,//quadri write
+    output reg                      spi_swrst,//software reset
+    output reg                [3:0] spi_csreg,//spi slave cs
     //other bits reserve
     //REG_CLKDIV  0x04;  [5:2] 0001;
-    output logic                [7:0] spi_clk_div,//0x00:div2,0x01:div4,etc
+    output reg                [7:0] spi_clk_div,//0x00:div2,0x01:div4,etc
     //REG_SPICMD  0x08;  [5:2] 0010;
-    output logic               [31:0] spi_cmd,
+    output reg               [31:0] spi_cmd,
     //REG_SPIADR  0x0c;  [5:2] 0011;
-    output logic               [31:0] spi_addr,
+    output reg               [31:0] spi_addr,
     //REG_SPILEN  0x10;  [5:2] 0100;
-    output logic                [5:0] spi_cmd_len,
-    output logic                [5:0] spi_addr_len,//13:8
-    output logic               [15:0] spi_data_len,//31:16
+    output reg                [5:0] spi_cmd_len,
+    output reg                [5:0] spi_addr_len,//13:8
+    output reg               [15:0] spi_data_len,//31:16
     //REG_SPIDUM  0x14;  [5:2] 0101;
-    output logic               [15:0] spi_dummy_rd,
-    output logic               [15:0] spi_dummy_wr,
+    output reg               [15:0] spi_dummy_rd,
+    output reg               [15:0] spi_dummy_wr,
     //REG_TXFIFO  0x18;  [5:2] 0110;
-    output logic               [31:0] spi_data_tx,
-    input  logic               [31:0] spi_status,
+    output wire               [31:0] spi_data_tx,
+    input  wire               [31:0] spi_status,
     //REG_RXFIFO  0x20;  [5:2] 1000;
-    input  logic               [31:0] spi_data_rx,
-    //REG_INTCFG  0x24;  [5:2] 0110;
-    output logic [BIGLOG_BUFFER_DEPTH:0] spi_int_th_tx,//spi interrupt threshold of transmit
-    output logic [BIGLOG_BUFFER_DEPTH:0] spi_int_th_rx,//spi interrupt threshold of receive 
-    output logic [BIGLOG_BUFFER_DEPTH:0] spi_int_cnt_tx,//spi interrupt max brust data count of transmit
-    output logic [BIGLOG_BUFFER_DEPTH:0] spi_int_cnt_rx,//spi interrupt max brust data count of receive
-    output logic                      spi_int_cnt_en,//spi interrupt counter enable
-    output logic                      spi_int_en,//spi interrupt enable
-    //i dont know
-    output logic                      spi_clk_div_valid,
-    output logic                      spi_int_rd_sta,//spi read status,0 idle,1 busy
-    output logic                      spi_data_tx_valid,
-    input  logic                      spi_data_tx_ready,
-    input  logic                      spi_data_rx_valid,
-    output logic                      spi_data_rx_ready
+    input  wire               [31:0] spi_data_rx,
+    //REG_INTCFG  0x24;  [5:2] 0110; interrupt configuration
+    output reg [BIGLOG_BUFFER_DEPTH:0] spi_int_th_tx,//spi interrupt threshold of transmit
+    output reg [BIGLOG_BUFFER_DEPTH:0] spi_int_th_rx,//spi interrupt threshold of receive 
+    output reg [BIGLOG_BUFFER_DEPTH:0] spi_int_cnt_tx,//spi interrupt max brust data count of transmit
+    output reg [BIGLOG_BUFFER_DEPTH:0] spi_int_cnt_rx,//spi interrupt max brust data count of receive
+    output reg                      spi_int_cnt_en,//spi interrupt counter enable
+    output reg                      spi_int_en,//spi interrupt enable
+    //REG_INTSTA
+    output wire                      spi_int_rd_sta,//spi read status,0 idle,1 busy
+
+    //ready and valid
+    output reg                      spi_clk_div_valid,
+    output wire                      spi_data_tx_valid,
+    input  wire                      spi_data_tx_ready,
+    input  wire                      spi_data_rx_valid,
+    output wire                      spi_data_rx_ready
 );
 
-    logic [3:0] write_address;
-    logic [3:0] read_address;
+    wire [3:0] write_address;
+    wire [3:0] read_address;
 
     assign write_address = PADDR[5:2];
     assign read_address  = PADDR[5:2];
@@ -129,19 +137,19 @@ module spi_master_apb_if
             spi_qrd           <= 1'b0;
             spi_qwr           <= 1'b0;
             spi_clk_div_valid <= 1'b0; 
-            spi_clk_div       <=  '0;
-            spi_cmd           <=  '0;
-            spi_addr          <=  '0;
-            spi_cmd_len       <=  '0;
-            spi_addr_len      <=  '0;
-            spi_data_len      <=  '0;
-            spi_dummy_rd      <=  '0;
-            spi_dummy_wr      <=  '0;
-            spi_csreg         <=  '0;
-            spi_int_th_tx     <=  '0;
-            spi_int_th_rx     <=  '0;
-            spi_int_cnt_tx    <=  '0;
-            spi_int_cnt_rx    <=  '0;
+            spi_clk_div       <= 8'b0;
+            spi_cmd           <= 32'b0;
+            spi_addr          <= 32'b0;
+            spi_cmd_len       <=  6'b0;
+            spi_addr_len      <=  6'b0;
+            spi_data_len      <=  16'b0;
+            spi_dummy_rd      <=  16'b0;
+            spi_dummy_wr      <=  16'b0;
+            spi_csreg         <=  4'b0;
+            spi_int_th_tx     <=  {(BIGLOG_BUFFER_DEPTH+1){1'b0}};
+            spi_int_th_rx     <=  {(BIGLOG_BUFFER_DEPTH+1){1'b0}};
+            spi_int_cnt_tx    <=  {(BIGLOG_BUFFER_DEPTH+1){1'b0}};
+            spi_int_cnt_rx    <=  {(BIGLOG_BUFFER_DEPTH+1){1'b0}};
             spi_int_cnt_en    <= 1'b0; 
             spi_int_en        <= 1'b0; 
         end
@@ -219,7 +227,8 @@ module spi_master_apb_if
 
 
   // implement slave model register read mux
-  always_comb
+  //always_comb
+    always @(*) 
     begin
       case(read_address)
         `REG_STATUS:
@@ -238,7 +247,7 @@ module spi_master_apb_if
             PRDATA = spi_data_rx;
         `REG_INTCFG:
         begin
-            PRDATA                           = '0;
+            PRDATA                           = 32'b0;
             PRDATA[     BIGLOG_BUFFER_DEPTH: 0] = spi_int_th_tx;
             PRDATA[ 8 + BIGLOG_BUFFER_DEPTH: 8] = spi_int_th_rx;
             PRDATA[16 + BIGLOG_BUFFER_DEPTH:16] = spi_int_cnt_tx;
@@ -247,7 +256,7 @@ module spi_master_apb_if
             PRDATA[31]                       = spi_int_en;
         end
         default:
-            PRDATA = '0;
+            PRDATA = 32'b0;
       endcase
     end // SLAVE_REG_READ_PROC
 

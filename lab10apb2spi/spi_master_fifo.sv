@@ -46,7 +46,8 @@ module spi_master_fifo
     assign full = (elements == BUFFER_DEPTH);
     assign elements_o = elements;
 
-    always_ff @(posedge clk_i, negedge rst_ni)
+    //always_ff 
+    always @(posedge clk_i, negedge rst_ni)
     begin: elements_sequential
         if (rst_ni == 1'b0)
             elements <= 0;
@@ -70,7 +71,8 @@ module spi_master_fifo
         end
     end
 
-    always_ff @(posedge clk_i, negedge rst_ni)
+    //always_ff 
+    always @(posedge clk_i, negedge rst_ni)
     begin: buffers_sequential
         if (rst_ni == 1'b0)
         begin
@@ -85,7 +87,8 @@ module spi_master_fifo
         end
     end
 
-    always_ff @(posedge clk_i, negedge rst_ni)
+    //always_ff 
+    always @(posedge clk_i, negedge rst_ni)
     begin: sequential
         if (rst_ni == 1'b0)
         begin

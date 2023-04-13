@@ -1,0 +1,13 @@
+{   "version": "2.0.0",
+    "label": "Iverilog compile and run",
+    "type": "shell",
+    "command": "iverilog",
+    "args": [
+        "-g2005-sv",
+        "-o",
+        "${workspaceFolder}\\${fileNameWithoutExt}.out",
+        "${workspaceFolder}\\spi_master_apb_if.sv"
+    ]
+}
+
+//"verilog.linting.iverilog.verilogHDL.standard": "Verilog-2005"
