@@ -317,12 +317,12 @@ module apb_spi_master
         .elements_o ( elements_tx            ),
 
         .data_o     ( spi_ctrl_data_tx       ),
-        .valid_o    ( spi_ctrl_data_tx_valid ),
-        .ready_i    ( spi_ctrl_data_tx_ready ),
+        .NotEmpty    ( spi_ctrl_data_tx_valid ),
+        .PutOutWill    ( spi_ctrl_data_tx_ready ),
 
-        .valid_i    ( spi_data_tx_valid      ),
+        .PutInWill    ( spi_data_tx_valid      ),
         .data_i     ( spi_data_tx            ),
-        .ready_o    ( spi_data_tx_ready      )
+        .NotFull    ( spi_data_tx_ready      )
     );
 
     spi_master_fifo
@@ -339,12 +339,12 @@ module apb_spi_master
         .elements_o ( elements_rx            ),
 
         .data_o     ( spi_data_rx            ),
-        .valid_o    ( spi_data_rx_valid      ),
-        .ready_i    ( spi_data_rx_ready      ),
+        .NotEmpty    ( spi_data_rx_valid      ),
+        .PutOutWill    ( spi_data_rx_ready      ),
 
-        .valid_i    ( spi_ctrl_data_rx_valid ),
+        .PutInWill    ( spi_ctrl_data_rx_valid ),
         .data_i     ( spi_ctrl_data_rx       ),
-        .ready_o    ( spi_ctrl_data_rx_ready )
+        .NotFull    ( spi_ctrl_data_rx_ready )
     );
 
     spi_master_controller u_spictrl
