@@ -93,9 +93,13 @@ module spi_master_apb_if
     output reg               [15:0] spi_dummy_wr,
     //REG_TXFIFO  0x18;  [5:2] 0110;
     output wire               [31:0] spi_data_tx,
+    output wire                      spi_data_tx_valid,
+    input  wire                      spi_data_tx_ready,
     input  wire               [31:0] spi_status,
     //REG_RXFIFO  0x20;  [5:2] 1000;
     input  wire               [31:0] spi_data_rx,
+    input  wire                      spi_data_rx_valid,
+    output wire                      spi_data_rx_ready,
     //REG_INTCFG  0x24;  [5:2] 0110; interrupt configuration
     output reg [BIGLOG_BUFFER_DEPTH:0] spi_int_th_tx,//spi interrupt threshold of transmit
     output reg [BIGLOG_BUFFER_DEPTH:0] spi_int_th_rx,//spi interrupt threshold of receive 
@@ -107,11 +111,9 @@ module spi_master_apb_if
     output wire                      spi_int_rd_sta,//spi read status,0 idle,1 busy
 
     //ready and valid
-    output reg                      spi_clk_div_valid,
-    output wire                      spi_data_tx_valid,
-    input  wire                      spi_data_tx_ready,
-    input  wire                      spi_data_rx_valid,
-    output wire                      spi_data_rx_ready
+    output reg                      spi_clk_div_valid
+
+    
 );
 
     wire [3:0] write_address;
@@ -202,7 +204,7 @@ module spi_master_apb_if
                       spi_dummy_wr[7:0]  <= PWDATA[23:16];
                       spi_dummy_wr[15:8] <= PWDATA[31:24];
                   end
-                //tx/rx fifo?
+                
                   `REG_INTCFG:
                   begin
                       spi_int_th_tx  <= PWDATA[     BIGLOG_BUFFER_DEPTH: 0];
@@ -225,7 +227,7 @@ module spi_master_apb_if
               end
     end // SLAVE_REG_WRITE_PROC
 
-
+  //rx fifo
   // implement slave model register read mux
   //always_comb
     always @(*) 
@@ -259,7 +261,7 @@ module spi_master_apb_if
             PRDATA = 32'b0;
       endcase
     end // SLAVE_REG_READ_PROC
-
+    //tx fifo
     assign spi_data_tx       = PWDATA;
     assign spi_data_tx_valid = PSEL & PENABLE &  PWRITE & (write_address == `REG_TXFIFO);
     assign spi_data_rx_ready = PSEL & PENABLE & ~PWRITE & (read_address  == `REG_RXFIFO);

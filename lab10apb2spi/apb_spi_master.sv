@@ -348,9 +348,10 @@ module apb_spi_master
     );
 
     spi_master_controller u_spictrl
-    (
+    (   //clk and reset
         .clk                    ( HCLK                   ),
         .rstn                   ( HRESETn                ),
+        //apb regs
         .eot                    ( s_eot                  ),
         .spi_clk_div            ( spi_clk_div            ),
         .spi_clk_div_valid      ( spi_clk_div_valid      ),
@@ -368,12 +369,14 @@ module apb_spi_master
         .spi_qrd                ( spi_qrd                ),
         .spi_qwr                ( spi_qwr                ),
         .spi_csreg              ( spi_csreg              ),
+        //fifo I/F
         .spi_ctrl_data_tx       ( spi_ctrl_data_tx       ),
         .spi_ctrl_data_tx_valid ( spi_ctrl_data_tx_valid ),
         .spi_ctrl_data_tx_ready ( spi_ctrl_data_tx_ready ),
         .spi_ctrl_data_rx       ( spi_ctrl_data_rx       ),
         .spi_ctrl_data_rx_valid ( spi_ctrl_data_rx_valid ),
         .spi_ctrl_data_rx_ready ( spi_ctrl_data_rx_ready ),
+        //top_out
         .spi_clk                ( spi_clk                ),
         .spi_csn0               ( spi_csn0               ),
         .spi_csn1               ( spi_csn1               ),

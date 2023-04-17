@@ -16,20 +16,19 @@ module spi_master_fifo
     parameter BUFFER_DEPTH = 2,
     parameter LOG_BUFFER_DEPTH = `log2(BUFFER_DEPTH)
 )
-(
+(   //clk and reset
     input  logic                    clk_i,
-    input  logic                    rst_ni,
-
-    input  logic                    clr_i,
-
-    output logic [LOG_BUFFER_DEPTH:0] elements_o,//numbers of elements
-
-    output logic [DATA_WIDTH-1 : 0] data_o,
-    output logic                    NotEmpty,//fifo is not empty,u read is valid
+    input  logic                    rst_ni,//async reset
+    input  logic                    clr_i,//sync reset
+    //input 
     input  logic                    PutOutWill,//receiver wanna put out
-
     input  logic                    PutInWill,//tranmitter wanna put in
+    //data input and output 
     input  logic [DATA_WIDTH-1 : 0] data_i,
+    output logic [DATA_WIDTH-1 : 0] data_o,
+    //output
+    output logic [LOG_BUFFER_DEPTH:0] elements_o,//numbers of elements   
+    output logic                    NotEmpty,//fifo is not empty,u read is valid
     output logic                    NotFull//fifo is not full,u can write
 );
 

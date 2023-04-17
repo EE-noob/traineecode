@@ -13,13 +13,17 @@
 `define SPI_QUAD_RX 2'b10
 
 module spi_master_controller
-(
+(//clk and rst
     input  logic                          clk,
     input  logic                          rstn,
+
     output logic                          eot,
+//apb regs
     input  logic                    [7:0] spi_clk_div,
     input  logic                          spi_clk_div_valid,
+
     output logic                    [6:0] spi_status,
+
     input  logic                   [31:0] spi_addr,
     input  logic                    [5:0] spi_addr_len,
     input  logic                   [31:0] spi_cmd,
@@ -33,12 +37,14 @@ module spi_master_controller
     input  logic                          spi_wr,
     input  logic                          spi_qrd,
     input  logic                          spi_qwr,
+    //fifo I/F
     input  logic                   [31:0] spi_ctrl_data_tx,
     input  logic                          spi_ctrl_data_tx_valid,
     output logic                          spi_ctrl_data_tx_ready,
     output logic                   [31:0] spi_ctrl_data_rx,
     output logic                          spi_ctrl_data_rx_valid,
     input  logic                          spi_ctrl_data_rx_ready,
+    //spi slave I/F
     output logic                          spi_clk,
     output logic                          spi_csn0,
     output logic                          spi_csn1,
@@ -49,6 +55,7 @@ module spi_master_controller
     output logic                          spi_sdo1,
     output logic                          spi_sdo2,
     output logic                          spi_sdo3,
+
     input  logic                          spi_sdi0,
     input  logic                          spi_sdi1,
     input  logic                          spi_sdi2,
@@ -147,7 +154,8 @@ module spi_master_controller
     .clk_en_o       ( rx_clk_en              )
   );
 
-  always_comb
+  //always_comb
+  always@(*)
   begin
       data_to_tx       =  'h0;
       data_to_tx_valid = 1'b0;
