@@ -66,9 +66,13 @@ module spi_master_clkgen
             running      <= 1'b0;
         end
         else
-        begin
+        begin//1 clk... 
+            //en or spi_clk: cnt,cnt_tgt,spiclk ->next.
+            //!en&&!spi_clk:running=0.
             counter_trgt <= counter_trgt_next;
-            if ( !((spi_clk==1'b0)&&(~en)) )
+            //en==0:running=spi_clk_lastclk
+            //en==1:running=1.
+            if (spi_clk||en) 
             begin
                 running <= 1'b1;
                 spi_clk <= spi_clk_next;

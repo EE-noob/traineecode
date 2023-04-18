@@ -198,7 +198,8 @@ module spi_master_controller
       endcase
   end
 
-  always_comb
+  //always_comb
+  always@(*)
   begin
     spi_cs           = 1'b1;
     spi_clock_en     = 1'b0;
