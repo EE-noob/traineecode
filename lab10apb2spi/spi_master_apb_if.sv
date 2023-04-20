@@ -234,7 +234,8 @@ module spi_master_apb_if
     begin
       case(read_address)
         `REG_STATUS:
-            PRDATA = spi_status;
+            //PRDATA = {spi_csreg,3'b000,spi_rd, spi_wr, spi_qrd,spi_qwr,spi_swrst};
+            PRDATA = spi_status;//???If the read address and write address are the same, must it be the same register for reading and writing????
         `REG_CLKDIV:
             PRDATA = {24'h00_0000,spi_clk_div};
         `REG_SPICMD:

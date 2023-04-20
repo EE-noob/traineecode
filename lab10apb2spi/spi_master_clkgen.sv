@@ -28,7 +28,12 @@ module spi_master_clkgen
 
     logic       spi_clk_next;
     logic       running;
-
+    logic a;
+    always@(a)
+    begin
+    a=1;
+    a=0;
+    end
     //always_comb
     always @(*) 
     begin

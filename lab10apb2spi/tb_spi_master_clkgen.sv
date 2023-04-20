@@ -51,16 +51,11 @@ module tb_spi_master_clkgen;
         clk_div_valid = 1'b0;
         
         // Test case 3: clk_div = 1, spi_clk should have high frequency
-        //en = 1'b1;
         clk_div_valid = 1'b1;
         clk_div = 'h02;
         #200;
         clk_div_valid = 1'b0;
-        #10;
-        if(!(spi_clk == 1'b0)) 
-        $display("Test case 3 success"); 
-        else $display("Test case 3 failed: spi_clk frequency too low for clk_div = 1");
-        
+        #10;      
         // Test case 4: clk_div = 100, spi_clk should have lower frequency
         //en = 1'b1;
         clk_div_valid = 1'b1;

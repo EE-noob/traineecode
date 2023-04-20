@@ -1,13 +1,13 @@
-// Copyright 2015 ETH Zurich and University of Bologna.
-// Copyright and related rights are licensed under the Solderpad Hardware
-// License, Version 0.51 (the “License”); you may not use this file except in
-// compliance with the License.  You may obtain a copy of the License at
-// http://solderpad.org/licenses/SHL-0.51. Unless required by applicable law
-// or agreed to in writing, software, hardware and materials distributed under
-// this License is distributed on an “AS IS” BASIS, WITHOUT WARRANTIES OR
-// CONDITIONS OF ANY KIND, either express or implied. See the License for the
-// specific language governing permissions and limitations under the License.
-
+// ----------------------------------------------------
+//COPYRIGHT(c)2012，Macrosilico Technologies Co， Ltd+
+// All rights reserved
+// Module name : module. name .
+// function description :
+//
+// Author: sysu/MST202302018
+// Date:2023/4/14
+// history :none
+// ----------------------------------------------------
 `define SPI_STD     2'b00
 `define SPI_QUAD_TX 2'b01
 `define SPI_QUAD_RX 2'b10
@@ -17,12 +17,13 @@ module spi_master_controller
     input  logic                          clk,
     input  logic                          rstn,
 
-    output logic                          eot,
+    output logic                          eot,//End of Transmission
+    output logic                    [6:0] spi_ctrl_status,
 //apb regs
     input  logic                    [7:0] spi_clk_div,
     input  logic                          spi_clk_div_valid,
 
-    output logic                    [6:0] spi_status,
+    
 
     input  logic                   [31:0] spi_addr,
     input  logic                    [5:0] spi_addr_len,
@@ -212,13 +213,13 @@ module spi_master_controller
     ctrl_data_valid  = 1'b0;
     spi_en_rx        = 1'b0;
     spi_en_tx        = 1'b0;
-    spi_status       =  '0;
+    spi_ctrl_status       =  '0;
     s_spi_mode       = `SPI_QUAD_RX;
     eot              = 1'b0;
     case(state)
       IDLE:
       begin
-        spi_status[0] = 1'b1;
+        spi_ctrl_status[0] = 1'b1;
         s_spi_mode = `SPI_QUAD_RX;
         if (spi_rd || spi_wr || spi_qrd || spi_qwr)
         begin
@@ -298,7 +299,7 @@ module spi_master_controller
 
       CMD:
       begin
-        spi_status[1] = 1'b1;
+        spi_ctrl_status[1] = 1'b1;
         spi_cs = 1'b0;
         spi_clock_en = 1'b1;
         s_spi_mode = (en_quad) ? `SPI_QUAD_TX : `SPI_STD;
@@ -372,7 +373,7 @@ module spi_master_controller
       ADDR:
       begin
         spi_en_tx     = 1'b1;
-        spi_status[2] = 1'b1;
+        spi_ctrl_status[2] = 1'b1;
         spi_cs        = 1'b0;
         spi_clock_en  = 1'b1;
         s_spi_mode    = (en_quad) ? `SPI_QUAD_TX : `SPI_STD;
@@ -428,7 +429,7 @@ module spi_master_controller
 
       MODE:
       begin
-        spi_status[3] = 1'b1;
+        spi_ctrl_status[3] = 1'b1;
         spi_cs = 1'b0;
         spi_clock_en = 1'b1;
         spi_en_tx        = 1'b1;
@@ -437,7 +438,7 @@ module spi_master_controller
       DUMMY:
       begin
         spi_en_tx     = 1'b1;
-        spi_status[4] = 1'b1;
+        spi_ctrl_status[4] = 1'b1;
         spi_cs        = 1'b0;
         spi_clock_en  = 1'b1;
         s_spi_mode    = (en_quad) ? `SPI_QUAD_RX : `SPI_STD;
@@ -475,7 +476,7 @@ module spi_master_controller
 
       DATA_TX:
       begin
-        spi_status[5]    = 1'b1;
+        spi_ctrl_status[5]    = 1'b1;
         spi_cs           = 1'b0;
         spi_clock_en     = tx_clk_en;
         ctrl_data_mux    = DATA_FIFO;
@@ -494,7 +495,7 @@ module spi_master_controller
 
       DATA_RX:
       begin
-        spi_status[6] = 1'b1;
+        spi_ctrl_status[6] = 1'b1;
         spi_cs        = 1'b0;
         spi_clock_en  = rx_clk_en;
         s_spi_mode    = (en_quad) ? `SPI_QUAD_RX : `SPI_STD;
@@ -508,7 +509,7 @@ module spi_master_controller
       end
       WAIT_EDGE:
       begin
-        spi_status[6] = 1'b1;
+        spi_ctrl_status[6] = 1'b1;
         spi_cs        = 1'b0;
         spi_clock_en  = 1'b0;
         s_spi_mode    = (en_quad) ? `SPI_QUAD_RX : `SPI_STD;

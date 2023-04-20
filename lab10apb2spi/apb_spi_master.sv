@@ -58,12 +58,15 @@ module apb_spi_master
 
 
     localparam BIGLOG_BUFFER_DEPTH = `BigLog2(BUFFER_DEPTH);
-
+    //REG_CLKDIV  0x04;  [5:2] 0001;
     logic    [7:0] spi_clk_div;
+    
     logic          spi_clk_div_valid;
+    
     logic   [31:0] spi_status;
     logic   [31:0] spi_addr;
     logic    [5:0] spi_addr_len;
+    //REG_SPICMD  0x08;  [5:2] 0010;
     logic   [31:0] spi_cmd;
     logic    [5:0] spi_cmd_len;
     logic   [15:0] spi_data_len;
@@ -89,7 +92,7 @@ module apb_spi_master
     logic          spi_ctrl_data_rx_valid;
     logic          spi_ctrl_data_rx_ready;
 
-    logic          s_eot;
+    logic          s_eot;//Signal End of Transmission
 
     logic  [BIGLOG_BUFFER_DEPTH:0] elements_tx;
     logic  [BIGLOG_BUFFER_DEPTH:0] elements_rx;
@@ -259,7 +262,7 @@ module apb_spi_master
         .BUFFER_DEPTH   ( BUFFER_DEPTH   ),
         .APB_ADDR_WIDTH ( APB_ADDR_WIDTH )
     )
-    u_axiregs
+    u_spi_master_apb_if
     (
         .HCLK              ( HCLK              ),
         .HRESETn           ( HRESETn           ),
@@ -308,7 +311,7 @@ module apb_spi_master
         .DATA_WIDTH   ( 32           ),
         .BUFFER_DEPTH ( BUFFER_DEPTH )
     )
-    u_txfifo
+    u_spi_master_fifo
     (
         .clk_i      ( HCLK                   ),
         .rst_ni     ( HRESETn                ),
@@ -330,7 +333,7 @@ module apb_spi_master
         .DATA_WIDTH   ( 32           ),
         .BUFFER_DEPTH ( BUFFER_DEPTH )
     )
-    u_rxfifo
+    u_spi_master_fifo
     (
         .clk_i      ( HCLK                   ),
         .rst_ni     ( HRESETn                ),
@@ -347,7 +350,7 @@ module apb_spi_master
         .NotFull    ( spi_ctrl_data_rx_ready )
     );
 
-    spi_master_controller u_spictrl
+    spi_master_controller u_spi_master_controller
     (   //clk and reset
         .clk                    ( HCLK                   ),
         .rstn                   ( HRESETn                ),
@@ -355,7 +358,7 @@ module apb_spi_master
         .eot                    ( s_eot                  ),
         .spi_clk_div            ( spi_clk_div            ),
         .spi_clk_div_valid      ( spi_clk_div_valid      ),
-        .spi_status             ( spi_ctrl_status        ),
+        .spi_ctrl_status             ( spi_ctrl_status        ),
         .spi_addr               ( spi_addr               ),
         .spi_addr_len           ( spi_addr_len           ),
         .spi_cmd                ( spi_cmd                ),
