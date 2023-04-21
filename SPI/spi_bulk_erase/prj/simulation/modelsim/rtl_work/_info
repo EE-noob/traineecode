@@ -1,0 +1,228 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/86187/Desktop/SPI/spi_bulk_erase/prj/simulation/modelsim
+T_opt
+!s110 1635394734
+VX@VD9=kY^_T`ObKzMJUZ>0
+04 17 4 work tb_spi_bulk_erase fast 0
+=3-e86a6472f956-617a24ae-1d8-184a8
+o-quiet -auto_acc_if_foreign -work work -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneiv_hssi_ver -L cycloneiv_pcie_hip_ver -L cycloneiv_ver -L rtl_work -L work +acc
+n@_opt
+OL;O;10.4;61
+vacdc_check
+Z1 !s110 1635394719
+!i10b 1
+!s100 cJo0:`G`O6[JYNd=bbc4<3
+I9FnfoVHRKCf?RRdhEMm?G1
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+Z3 w1601017053
+8C:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/M25P16_VG_V12/acdc_check.v
+FC:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/M25P16_VG_V12/acdc_check.v
+Z4 L0 20
+Z5 OL;L;10.4;61
+r1
+!s85 0
+31
+!s108 1635394719.306000
+!s107 C:/Users/86187/Desktop/SPI/spi_bulk_erase/prj/../sim/M25P16_VG_V12/parameter.v|C:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/M25P16_VG_V12/acdc_check.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/86187/Desktop/SPI/spi_bulk_erase/prj/../sim/M25P16_VG_V12|-L|mtiAvm|-L|mtiRnm|-L|mtiOvm|-L|mtiUvm|-L|mtiUPF|-L|infact|C:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/M25P16_VG_V12/acdc_check.v|
+!i113 0
+Z6 o-vlog01compat -work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z7 !s92 -vlog01compat -work work +incdir+C:/Users/86187/Desktop/SPI/spi_bulk_erase/prj/../sim/M25P16_VG_V12 -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+vinternal_logic
+R1
+!i10b 1
+!s100 lQcNieL>95OB>QnMDIf1F3
+IFJ`Z9ZT6^3DiVg<78zKRG2
+R2
+R0
+R3
+8C:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/M25P16_VG_V12/internal_logic.v
+FC:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/M25P16_VG_V12/internal_logic.v
+R4
+R5
+r1
+!s85 0
+31
+!s108 1635394719.180000
+!s107 C:/Users/86187/Desktop/SPI/spi_bulk_erase/prj/../sim/M25P16_VG_V12/parameter.v|C:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/M25P16_VG_V12/internal_logic.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/86187/Desktop/SPI/spi_bulk_erase/prj/../sim/M25P16_VG_V12|-L|mtiAvm|-L|mtiRnm|-L|mtiOvm|-L|mtiUvm|-L|mtiUPF|-L|infact|C:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/M25P16_VG_V12/internal_logic.v|
+!i113 0
+R6
+R7
+vm25p16
+R1
+!i10b 1
+!s100 n20e5GIPRCVUWOcS18Kze1
+IL?D?oe10h6RZXeTn[;gL13
+R2
+R0
+R3
+8C:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/M25P16_VG_V12/M25p16.v
+FC:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/M25P16_VG_V12/M25p16.v
+R4
+R5
+r1
+!s85 0
+31
+!s108 1635394719.051000
+!s107 C:/Users/86187/Desktop/SPI/spi_bulk_erase/prj/../sim/M25P16_VG_V12/parameter.v|C:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/M25P16_VG_V12/M25p16.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/86187/Desktop/SPI/spi_bulk_erase/prj/../sim/M25P16_VG_V12|-L|mtiAvm|-L|mtiRnm|-L|mtiOvm|-L|mtiUvm|-L|mtiUPF|-L|infact|C:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/M25P16_VG_V12/M25p16.v|
+!i113 0
+R6
+R7
+vm25p16_driver
+Z8 !s110 1635394718
+!i10b 1
+!s100 jRoJLRTdA^W9JgE?[d_Dc2
+IJDEBSRND9mz4=N2:iQ3^;1
+R2
+R0
+R3
+8C:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/M25P16_VG_V12/m25p16_driver.v
+FC:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/M25P16_VG_V12/m25p16_driver.v
+R4
+R5
+r1
+!s85 0
+31
+!s108 1635394718.925000
+!s107 C:/Users/86187/Desktop/SPI/spi_bulk_erase/prj/../sim/M25P16_VG_V12/parameter.v|C:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/M25P16_VG_V12/m25p16_driver.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/86187/Desktop/SPI/spi_bulk_erase/prj/../sim/M25P16_VG_V12|-L|mtiAvm|-L|mtiRnm|-L|mtiOvm|-L|mtiUvm|-L|mtiUPF|-L|infact|C:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/M25P16_VG_V12/m25p16_driver.v|
+!i113 0
+R6
+R7
+vmemory_access
+R8
+!i10b 1
+!s100 RIm02odDi^b>AkEPNb93c1
+INDP>><P3gj[nWhO>@0iS53
+R2
+R0
+R3
+8C:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/M25P16_VG_V12/memory_access.v
+FC:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/M25P16_VG_V12/memory_access.v
+R4
+R5
+r1
+!s85 0
+31
+!s108 1635394718.810000
+!s107 C:/Users/86187/Desktop/SPI/spi_bulk_erase/prj/../sim/M25P16_VG_V12/parameter.v|C:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/M25P16_VG_V12/memory_access.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/86187/Desktop/SPI/spi_bulk_erase/prj/../sim/M25P16_VG_V12|-L|mtiAvm|-L|mtiRnm|-L|mtiOvm|-L|mtiUvm|-L|mtiUPF|-L|infact|C:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/M25P16_VG_V12/memory_access.v|
+!i113 0
+R6
+R7
+vspi_bulk_erase
+R8
+!i10b 1
+!s100 FT[RBG5@WmkZDG>X4ECne2
+I<iXHamJMdJ9MIEc>@7X3I3
+R2
+R0
+w1635394693
+8C:/Users/86187/Desktop/SPI/spi_bulk_erase/rtl/spi_bulk_erase.v
+FC:/Users/86187/Desktop/SPI/spi_bulk_erase/rtl/spi_bulk_erase.v
+L0 1
+R5
+r1
+!s85 0
+31
+!s108 1635394718.655000
+!s107 C:/Users/86187/Desktop/SPI/spi_bulk_erase/rtl/spi_bulk_erase.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/86187/Desktop/SPI/spi_bulk_erase/rtl|-L|mtiAvm|-L|mtiRnm|-L|mtiOvm|-L|mtiUvm|-L|mtiUPF|-L|infact|C:/Users/86187/Desktop/SPI/spi_bulk_erase/rtl/spi_bulk_erase.v|
+!i113 0
+R6
+Z9 !s92 -vlog01compat -work work +incdir+C:/Users/86187/Desktop/SPI/spi_bulk_erase/rtl -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+vspi_bulk_erase_ctrl
+R8
+!i10b 1
+!s100 `bg@4OU7aS^l1gdm4a6BG1
+I`lEfj`h^4SjdDi:n5_gQP1
+R2
+R0
+w1635394579
+8C:/Users/86187/Desktop/SPI/spi_bulk_erase/rtl/spi_bulk_erase_ctrl.v
+FC:/Users/86187/Desktop/SPI/spi_bulk_erase/rtl/spi_bulk_erase_ctrl.v
+L0 1
+R5
+r1
+!s85 0
+31
+!s108 1635394718.538000
+!s107 C:/Users/86187/Desktop/SPI/spi_bulk_erase/rtl/spi_bulk_erase_ctrl.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/86187/Desktop/SPI/spi_bulk_erase/rtl|-L|mtiAvm|-L|mtiRnm|-L|mtiOvm|-L|mtiUvm|-L|mtiUPF|-L|infact|C:/Users/86187/Desktop/SPI/spi_bulk_erase/rtl/spi_bulk_erase_ctrl.v|
+!i113 0
+R6
+R9
+vspi_drive
+R8
+!i10b 1
+!s100 MH^cPNj?A3QB[B9XMa5YI1
+IP58R320<bOS5A4jnW_ChT2
+R2
+R0
+w1635270112
+8C:/Users/86187/Desktop/SPI/spi_bulk_erase/rtl/spi_drive.v
+FC:/Users/86187/Desktop/SPI/spi_bulk_erase/rtl/spi_drive.v
+L0 3
+R5
+r1
+!s85 0
+31
+!s108 1635394718.399000
+!s107 C:/Users/86187/Desktop/SPI/spi_bulk_erase/rtl/spi_drive.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/86187/Desktop/SPI/spi_bulk_erase/rtl|-L|mtiAvm|-L|mtiRnm|-L|mtiOvm|-L|mtiUvm|-L|mtiUPF|-L|infact|C:/Users/86187/Desktop/SPI/spi_bulk_erase/rtl/spi_drive.v|
+!i113 0
+R6
+R9
+vtb_spi_bulk_erase
+R8
+!i10b 1
+!s100 9SdhWOzNf0Ez`BY6C446X2
+Im@HWn]i6a;1z9MEY=3[?i1
+R2
+R0
+w1635394454
+8C:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/tb_spi_bulk_erase.v
+FC:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/tb_spi_bulk_erase.v
+L0 7
+R5
+r1
+!s85 0
+31
+!s108 1635394718.276000
+!s107 C:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/tb_spi_bulk_erase.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/86187/Desktop/SPI/spi_bulk_erase/prj/../sim|-L|mtiAvm|-L|mtiRnm|-L|mtiOvm|-L|mtiUvm|-L|mtiUPF|-L|infact|C:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/tb_spi_bulk_erase.v|
+!i113 0
+R6
+!s92 -vlog01compat -work work +incdir+C:/Users/86187/Desktop/SPI/spi_bulk_erase/prj/../sim -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+vtestbench
+R8
+!i10b 1
+!s100 EjzG03?E@8Y^TRbkf4?]22
+IgCnKccImzOV7;5cdYT>?`3
+R2
+R0
+R3
+8C:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/M25P16_VG_V12/testbench.v
+FC:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/M25P16_VG_V12/testbench.v
+L0 19
+R5
+r1
+!s85 0
+31
+!s108 1635394718.130000
+!s107 C:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/M25P16_VG_V12/testbench.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/86187/Desktop/SPI/spi_bulk_erase/prj/../sim/M25P16_VG_V12|-L|mtiAvm|-L|mtiRnm|-L|mtiOvm|-L|mtiUvm|-L|mtiUPF|-L|infact|C:/Users/86187/Desktop/SPI/spi_bulk_erase/sim/M25P16_VG_V12/testbench.v|
+!i113 0
+R6
+R7

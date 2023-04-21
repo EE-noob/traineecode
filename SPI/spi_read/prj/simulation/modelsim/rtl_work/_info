@@ -1,0 +1,228 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dE:/CSDN/03/SPI/spi_read/prj/simulation/modelsim
+T_opt
+!s110 1654175807
+V6Gf;0`Eh_2:dDfQdH4DYa2
+04 11 4 work tb_spi_read fast 0
+=1-50ebf6e97cc8-6298b83f-1-1604
+o-quiet -auto_acc_if_foreign -work work -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneive_ver -L rtl_work -L work +acc
+n@_opt
+OL;O;10.4;61
+vacdc_check
+Z1 !s110 1654175806
+!i10b 1
+!s100 cJo0:`G`O6[JYNd=bbc4<3
+Im7gPfI>;zTT[IDMZ4KUlK2
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+Z3 w1601017053
+8E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/acdc_check.v
+FE:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/acdc_check.v
+Z4 L0 20
+Z5 OL;L;10.4;61
+r1
+!s85 0
+31
+!s108 1654175806.380000
+!s107 E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/parameter.v|E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/acdc_check.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12|E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/acdc_check.v|
+!i113 0
+Z6 o-vlog01compat -work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z7 !s92 -vlog01compat -work work +incdir+E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12 -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+vinternal_logic
+R1
+!i10b 1
+!s100 lQcNieL>95OB>QnMDIf1F3
+IY:N_:]H[OPCgc;i6z4;X80
+R2
+R0
+R3
+8E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/internal_logic.v
+FE:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/internal_logic.v
+R4
+R5
+r1
+!s85 0
+31
+!s108 1654175806.458000
+!s107 E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/parameter.v|E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/internal_logic.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12|E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/internal_logic.v|
+!i113 0
+R6
+R7
+vm25p16
+R1
+!i10b 1
+!s100 n20e5GIPRCVUWOcS18Kze1
+IzKdPFjiJW1Z[94Je_`Hc;3
+R2
+R0
+R3
+8E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/M25p16.v
+FE:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/M25p16.v
+R4
+R5
+r1
+!s85 0
+31
+!s108 1654175806.503000
+!s107 E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/parameter.v|E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/M25p16.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12|E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/M25p16.v|
+!i113 0
+R6
+R7
+vm25p16_driver
+R1
+!i10b 1
+!s100 jRoJLRTdA^W9JgE?[d_Dc2
+IFAjVo^cBnN[`AML[UbhZ81
+R2
+R0
+R3
+8E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/m25p16_driver.v
+FE:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/m25p16_driver.v
+R4
+R5
+r1
+!s85 0
+31
+!s108 1654175806.535000
+!s107 E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/parameter.v|E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/m25p16_driver.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12|E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/m25p16_driver.v|
+!i113 0
+R6
+R7
+vmemory_access
+R1
+!i10b 1
+!s100 RIm02odDi^b>AkEPNb93c1
+IXakg9XlbjR`c1AHzV8`=i3
+R2
+R0
+R3
+8E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/memory_access.v
+FE:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/memory_access.v
+R4
+R5
+r1
+!s85 0
+31
+!s108 1654175806.580000
+!s107 E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/parameter.v|E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/memory_access.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12|E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/memory_access.v|
+!i113 0
+R6
+R7
+vspi_drive
+R1
+!i10b 1
+!s100 MH^cPNj?A3QB[B9XMa5YI1
+I?cSBh]Af`>TTYB@:N0Ob[3
+R2
+R0
+w1635471915
+8E:/CSDN/03/SPI/spi_read/rtl/spi_drive.v
+FE:/CSDN/03/SPI/spi_read/rtl/spi_drive.v
+L0 3
+R5
+r1
+!s85 0
+31
+!s108 1654175806.346000
+!s107 E:/CSDN/03/SPI/spi_read/rtl/spi_drive.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+E:/CSDN/03/SPI/spi_read/rtl|E:/CSDN/03/SPI/spi_read/rtl/spi_drive.v|
+!i113 0
+R6
+Z8 !s92 -vlog01compat -work work +incdir+E:/CSDN/03/SPI/spi_read/rtl -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+vspi_read
+R1
+!i10b 1
+!s100 >AUgDkR>M[X;BQg0BFT3f3
+IT3nXhHPGGRaOf1oHcCZW52
+R2
+R0
+w1635496135
+8E:/CSDN/03/SPI/spi_read/rtl/spi_read.v
+FE:/CSDN/03/SPI/spi_read/rtl/spi_read.v
+L0 2
+R5
+r1
+!s85 0
+31
+!s108 1654175806.312000
+!s107 E:/CSDN/03/SPI/spi_read/rtl/spi_read.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+E:/CSDN/03/SPI/spi_read/rtl|E:/CSDN/03/SPI/spi_read/rtl/spi_read.v|
+!i113 0
+R6
+R8
+vspi_read_ctrl
+R1
+!i10b 1
+!s100 E@zGU]i8k9O>8Sca5DBE02
+IPZNAHWNO_FTJ@]Mf>S`Ab3
+R2
+R0
+w1635496764
+8E:/CSDN/03/SPI/spi_read/rtl/spi_read_ctrl.v
+FE:/CSDN/03/SPI/spi_read/rtl/spi_read_ctrl.v
+L0 2
+R5
+r1
+!s85 0
+31
+!s108 1654175806.272000
+!s107 E:/CSDN/03/SPI/spi_read/rtl/spi_read_ctrl.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+E:/CSDN/03/SPI/spi_read/rtl|E:/CSDN/03/SPI/spi_read/rtl/spi_read_ctrl.v|
+!i113 0
+R6
+R8
+vtb_spi_read
+R1
+!i10b 1
+!s100 JYNkk20dPn1mP8@C>h:]T2
+IXX`fd>SfUbB^?Z[R@Mh6`1
+R2
+R0
+w1636253152
+8E:/CSDN/03/SPI/spi_read/prj/../sim/tb_spi_read.v
+FE:/CSDN/03/SPI/spi_read/prj/../sim/tb_spi_read.v
+L0 7
+R5
+r1
+!s85 0
+31
+!s108 1654175806.659000
+!s107 E:/CSDN/03/SPI/spi_read/prj/../sim/tb_spi_read.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+E:/CSDN/03/SPI/spi_read/prj/../sim|E:/CSDN/03/SPI/spi_read/prj/../sim/tb_spi_read.v|
+!i113 0
+R6
+!s92 -vlog01compat -work work +incdir+E:/CSDN/03/SPI/spi_read/prj/../sim -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+vtestbench
+R1
+!i10b 1
+!s100 EjzG03?E@8Y^TRbkf4?]22
+IG?D;QM=WjO^WnS0ZToGYZ3
+R2
+R0
+R3
+8E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/testbench.v
+FE:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/testbench.v
+L0 19
+R5
+r1
+!s85 0
+31
+!s108 1654175806.424000
+!s107 E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/testbench.v|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12|E:/CSDN/03/SPI/spi_read/prj/../sim/M25P16_VG_V12/testbench.v|
+!i113 0
+R6
+R7

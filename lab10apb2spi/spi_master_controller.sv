@@ -97,13 +97,13 @@ module spi_master_controller
   logic tx_clk_en;
   logic rx_clk_en;
 
-  enum logic [2:0] {DATA_NULL,DATA_EMPTY,DATA_CMD,DATA_ADDR,DATA_FIFO} ctrl_data_mux;
+  enum logic [2:0] {DATA_NULL,DATA_EMPTY,DATA_CMD,DATA_ADDR,  DATA_FIFO} ctrl_data_mux;
 
-  enum logic [4:0] {IDLE,CMD,ADDR,MODE,DUMMY,DATA_TX,DATA_RX,WAIT_EDGE} state,state_next;
+  enum logic [4:0] {IDLE,CMD,ADDR,MODE,   DUMMY,DATA_TX,DATA_RX,WAIT_EDGE} state,state_next;
 
   assign en_quad = spi_qrd | spi_qwr | en_quad_int;
 
-  spi_master_clkgen u_clkgen
+  spi_master_clkgen u_spi_master_clkgen
   (
     .clk           ( clk               ),
     .rstn          ( rstn              ),
@@ -115,7 +115,7 @@ module spi_master_controller
     .spi_rise      ( spi_rise          )
   );
 
-  spi_master_tx u_txreg
+  spi_master_tx u_spi_master_tx
   (
     .clk            ( clk              ),
     .rstn           ( rstn             ),
@@ -156,6 +156,7 @@ module spi_master_controller
   );
 
   //always_comb
+  //ctrl_data_mux
   always@(*)
   begin
       data_to_tx       =  'h0;
@@ -213,17 +214,20 @@ module spi_master_controller
     ctrl_data_valid  = 1'b0;
     spi_en_rx        = 1'b0;
     spi_en_tx        = 1'b0;
-    spi_ctrl_status       =  '0;
+    spi_ctrl_status       = '0;
     s_spi_mode       = `SPI_QUAD_RX;
     eot              = 1'b0;
     case(state)
       IDLE:
+      //priority：cmd > addr >data
       begin
         spi_ctrl_status[0] = 1'b1;
         s_spi_mode = `SPI_QUAD_RX;
         if (spi_rd || spi_wr || spi_qrd || spi_qwr)
         begin
           spi_cs       = 1'b0;
+          //Low power design;
+          //no rw no clk
           spi_clock_en = 1'b1;
 
           if (spi_cmd_len != 0)

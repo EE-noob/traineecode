@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Thu Jun 02 21:16:33 2022
+Quartus II 64-Bit Version : 13.1.0 Build 162 10/23/2013 SJ Full Version
+Revision Name : spi_read
+Top-level Entity Name : spi_read
+Family : Cyclone IV E
+Total logic elements : 1,233
+    Total combinational functions : 684
+    Dedicated logic registers : 968
+Total registers : 968
+Total pins : 6
+Total virtual pins : 0
+Total memory bits : 81,920
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0

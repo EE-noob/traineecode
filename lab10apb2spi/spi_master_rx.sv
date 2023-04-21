@@ -14,11 +14,14 @@ module spi_master_rx
     input  logic        rstn,
     input  logic        en,
     input  logic        rx_edge,
+
     output logic        rx_done,
+    //
     input  logic        sdi0,
     input  logic        sdi1,
     input  logic        sdi2,
     input  logic        sdi3,
+
     input  logic        en_quad_in,
     input  logic [15:0] counter_in,
     input  logic        counter_in_upd,
@@ -44,7 +47,8 @@ module spi_master_rx
   assign data = data_int_next;
   assign rx_done = done;
 
-  always_comb
+  //always_comb
+  always@(*)
   begin
     if (counter_in_upd)
       counter_trgt_next = (en_quad_in) ? {2'b00,counter_in[15:2]} : counter_in;
@@ -54,7 +58,8 @@ module spi_master_rx
 
   assign done = (counter == counter_trgt-1) && rx_edge;
 
-  always_comb
+  //always_comb
+  always@(*)
   begin
     rx_NS         = rx_CS;
     clk_en_o      = 1'b0;
